@@ -9,13 +9,16 @@ Any input data can be changed from here
 from genmatrix import generateMatrix, chooseCECModuleCoeffs
 import pvyield
 import pvchar as pvc
+import os
 
-def main():
+def main(datafile='C:\\Users\\elek2_backup\\Helena\\DATA_WORKSPACES\\Photoclass\\outdoor_data_example.csv'):
     
     ''' 
     
     That is an example of how to use the code.
     For more details refer to the corresponding modules
+
+    datafile : csv file to save the ouput data
     
     Also See: generateMatrix, pvchar and pv yield
     
@@ -24,8 +27,11 @@ def main():
     # Generate a matrix
     
     # choose a module from the CEC module database
+
+    os.chdir('..')
+    samfile = os.path.join(os.getcwd(),'Test Files//sam-library-cec-modules-2015-6-30.csv')
     
-    module_coeffs = chooseCECModuleCoeffs(file = 'sam-library-cec-modules-2015-6-30.csv', module_model = '1Soltech_1STH_245_WH')
+    module_coeffs = chooseCECModuleCoeffs(file = samfile, module_model = '1Soltech_1STH_245_WH')
     
     # Generate matrix (default values are for Silicon)
     
@@ -48,7 +54,7 @@ def main():
     # define your datafile (this input might change in the future datafile is added in function for convenience 
     # but is not very good practice)
     
-    datafile = 'C:\\Users\\elek2_backup\\Helena\\DATA_WORKSPACES\\Photoclass\\outdoor_data_example.csv'
+    
     
     
     output = pvyield.pvOutput(datafile, ermodule, P_stc, area = 1, thrmcoeff = None, output_file = None,
